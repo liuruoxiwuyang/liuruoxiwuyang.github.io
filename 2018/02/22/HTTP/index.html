@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="超文本传输协议，基于TCP/IP协议运作，是无连接、无状态的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP">
+<meta property="og:url" content="http://yoursite.com/2018/02/22/HTTP/index.html">
+<meta property="og:site_name" content="若曦的博客">
+<meta property="og:description" content="超文本传输协议，基于TCP/IP协议运作，是无连接、无状态的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-22T07:57:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP">
+<meta name="twitter:description" content="超文本传输协议，基于TCP/IP协议运作，是无连接、无状态的。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/22/HTTP/">
+
+
+
+
+
+  <title>HTTP | 若曦的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">若曦的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/HTTP/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘若曦">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若曦的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T15:33:01+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  超文本传输协议，基于TCP/IP协议运作，是无连接、无状态的。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p>超文本传输协议，基于TCP/IP协议运作，是无连接、无状态的。<br>三项 WWW 构建技术：HTTP协议、HTML、URL</p>
+<p>与HTTP关系密切的协议</p>
+<blockquote>
+<p>IP: 处于网络层，负责把各种数据包传送给对方。IP 间通信依赖 MAC 地址。（使用ARP协议可以根据IP反查出对应的MAC地址）<br>TCP: 位于传输层，通过三次握手确保数据送达目标处。三次握手：发送端首先发送一个带有 SYN 标志的数据包给对方。接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传一个带 ACK 标志的数据包，表示握手结束。<br>DNS: 处于应用层，负责域名解析。通过域名查找 IP 地址，或逆向从 IP 地址反查域名。</p>
+</blockquote>
+<h2 id="HTTP-报文"><a href="#HTTP-报文" class="headerlink" title="HTTP 报文"></a>HTTP 报文</h2><p>HTTP 报文分为请求报文和响应报文</p>
+<blockquote>
+<p>HTTP 请求报文由请求方法、请求URI、协议版本、可选的请求首部字段和内容实体构成</p>
+</blockquote>
+<blockquote>
+<p>HTTP 响应报文由协议版本、状态码、用以解释状态的原因短语、可选的响应首部字段以及实体主体构成</p>
+</blockquote>
+<p>使用 Cookie 实现 HTTP 的状态管理<br>设置 keep-alive 实现 HTTP 的持久连接</p>
+<h2 id="TCP-IP-分层"><a href="#TCP-IP-分层" class="headerlink" title="TCP/IP 分层"></a>TCP/IP 分层</h2><p>TCP/IP 协议族按层次分别分为以下四个层次：应用层、传输层、网络层和数据链路层</p>
+<p>TCP/IP 通信传输流：<br>发送端：应用层 =》传输层 =》网络层 =》链路层 =》</p>
+<p>接收端：应用层《= 传输层《= 网络层《= 链路层《=</p>
+<p>发送端，每经过一层，都会给数据添加该层的首部；到达接收端时，数据每经过一层，都会解析对应层的首部信息</p>
+<h1 id="HTTP-状态码"><a href="#HTTP-状态码" class="headerlink" title="HTTP 状态码"></a>HTTP 状态码</h1><p>状态码的职责是当客户端向服务端发送请求时，描述返回的请求结果。</p>
+<ul>
+<li>1xx：信息性状态码，接收的请求正在处理</li>
+<li>2xx：成功状态码，请求正常处理完毕</li>
+<li>3xx：重定向状态码，需要进行附加操作以完成请求（PS: 304是指缓存，不是重定向）</li>
+<li>4xx：客户端错误状态码，服务端无法处理请求</li>
+<li>5xx：服务端错误状态码，服务端处理请求出错</li>
+</ul>
+<h1 id="HTTP-首部"><a href="#HTTP-首部" class="headerlink" title="HTTP 首部"></a>HTTP 首部</h1><p>有四种首部：通用首部、请求首部、响应首部、实体首部</p>
+<h2 id="通用首部："><a href="#通用首部：" class="headerlink" title="通用首部："></a>通用首部：</h2><p>Cache-Control: 控制缓存行为</p>
+<p>Connection: HTTP 连接管理，HTTP1.1之后，默认设置为 keep-alive，表示持久连接</p>
+<p>Date: 创建报文的时间</p>
+<p>Pragma: 历史遗留字段，用于控制缓存</p>
+<p>Upgrade: 是否升级为其他协议</p>
+<p>Via: 代理服务器的相关信息</p>
+<h2 id="请求首部："><a href="#请求首部：" class="headerlink" title="请求首部："></a>请求首部：</h2><p>Accept/Accept-*: 内容协商相关的首部，设置客户端可接收的数据格式等</p>
+<p>If-*: 称为条件请求，服务端接收到附带条件的请求后，只有判断条件为 true 时，才会执行请求</p>
+<p>UA: 客户端程序信息</p>
+<p>Referer: 请求来源</p>
+<p>Host: 请求资源所在的服务器（主机）</p>
+<h2 id="响应首部："><a href="#响应首部：" class="headerlink" title="响应首部："></a>响应首部：</h2><p>Accept-Range: 是否接受范围请求</p>
+<p>ETag: 实体标识符，标记资源信息，用于判断资源缓存是否过期</p>
+<p>Location: 令客户端重定向至指定 URI</p>
+<p>Vary: 代理服务器缓存的管理信息</p>
+<p>Server: HTTP 服务器的安装信息</p>
+<h2 id="实体首部："><a href="#实体首部：" class="headerlink" title="实体首部："></a>实体首部：</h2><p>Allow: 资源可支持的 HTTP 方法（GET、POST等）<br>Content-*: 实体主体相关的设置，如实体主体的编码格式，自然语言等</p>
+<p>Expires: 实体主体过期的日期时间</p>
+<p>Last-Modified: 资源的最后修改时间</p>
+<h2 id="为-Cookie-服务的首部："><a href="#为-Cookie-服务的首部：" class="headerlink" title="为 Cookie 服务的首部："></a>为 Cookie 服务的首部：</h2><p>Cookie: 服务端接收到的 Cookie 信息，包含了客户端发送的 sessionId (请求首部)</p>
+<p>Set-Cookie: 开始状态管理的 Cookie 信息，包含了服务端返回的 sessionId （响应首部）</p>
+<h2 id="缓存相关首部"><a href="#缓存相关首部" class="headerlink" title="缓存相关首部"></a>缓存相关首部</h2><p>浏览器缓存分为强缓存和协商缓存</p>
+<p>两者主要区别在于：强缓存不会向服务器发起请求，直接返回状态码：200 from cache；协商缓存会向服务器发起请求验证，如果缓存有效，那么返回状态码 304</p>
+<h3 id="强缓存相关字段"><a href="#强缓存相关字段" class="headerlink" title="强缓存相关字段"></a>强缓存相关字段</h3><blockquote>
+<p>Pragma：http 1.0 时代，控制缓存的http首部字段</p>
+</blockquote>
+<blockquote>
+<p>Expires：http 1.0 时代出现，用于设置缓存的时间</p>
+</blockquote>
+<blockquote>
+<p>Cache-control：http 1.1 新增的，可用于禁止缓存（no-store）、设置缓存失效时间（max-age）<br>no-store 表示禁用缓存，不将资源存储在浏览器中，no-cache表示不使用浏览器中存储的缓存数据（不缓存过期的资源）</p>
+</blockquote>
+<p>Pragma、Expires 和 Cache-Control 同时出现，那么会以 Cache-Control 为准</p>
+<h3 id="协商缓存相关"><a href="#协商缓存相关" class="headerlink" title="协商缓存相关"></a>协商缓存相关</h3><blockquote>
+<p>If-Modified-Since/LastModified：请求首部 If-Modified 与响应首部 LastModified，标识资源最后更改的时间，如果两者相同，则返回 304 ，不相同则返回 200，然后客户端发起请求最新资源</p>
+</blockquote>
+<blockquote>
+<p>If-Unmodified-Since/LastModified：表示从某个时间点算起, 文件没有被修改。如果没有被修改，则开始继续传送文件，服务器返回 200；如果文件被修改，则不传输，服务器返回 412（预处理错误）</p>
+</blockquote>
+<blockquote>
+<p>If-None-Match/Etag：请求首部 If-None-Match 与响应首部 Etag，标识资源文件有没有被实质性更改过。Etag 是服务端根据算法，对资源生成的唯一标识，根据这个唯一标识是否相同，判断资源有没有被修改。</p>
+</blockquote>
+<p>Last-Modified 和 ETag 同时被使用，则两者都必须验证通过，才会返回 304 状态码，否则服务端会认为资源缓存失效，重新发送资源给客户端</p>
+<ul>
+<li><p>如果If-Modified-Since的时间比服务器当前时间(当前的请求时间request_time)还晚，会认为是个非法请求</p>
+</li>
+<li><p>Last-Modified 的缺点：只能精确到秒的级别，一旦在一秒的时间里出现了多次修改，那么这个字段不会发生改变</p>
+</li>
+<li>Etag的缺点：分布式系统中，每台机器生成的 Etag 会不同，导致缓存失效，所以分布式系统尽量关闭掉Etag</li>
+<li>Expires的缺点：返回的到期时间是服务器端的时间，如果客户端的时间与服务器的时间相差很大，那么误差就很大</li>
+</ul>
+<h1 id="通信数据转发程序：代理、网关、隧道"><a href="#通信数据转发程序：代理、网关、隧道" class="headerlink" title="通信数据转发程序：代理、网关、隧道"></a>通信数据转发程序：代理、网关、隧道</h1><h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><p>代理服务器的基本行为就是接收客户端发送的请求后转发给其他服务器。<br>持有资源实体的服务器被称为源服务器。在HTTP通信过程中，从源服务器返回的响应经过多个串联似的的代理服务器，再传给客户端。<br>代理按两种基准分类：一种是是否使用缓存，另一种是是否会修改报文</p>
+<blockquote>
+<p>缓存代理：会预先将资源的副本保存在代理服务器上，当收到客户端对相同资源的再次请求时，会直接从代理服务器中返回<br>透明代理：不对报文做任何加工的代理类型被称为透明代理，反之，称为非透明代理</p>
+</blockquote>
+<p>代理还分为正向代理和反向代理</p>
+<blockquote>
+<p>正向代理：代理客户端向源服务器发起请求的，并将源服务器的响应传回给客户端的代理，称为正向代理，代理的对象是客户端<br>反向代理：对于客户端而言它就像是源服务器，客户端发起请求，反向代理会将请求自动转发给其他服务器。反向代理还可以为后端服务器提供负载均衡，或为后端响应较慢的服务器提供缓冲服务。代理的对象是服务端</p>
+</blockquote>
+<h2 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h2><p>网关可以将 HTTP 协议转换成其他协议。利用网关能够提高通信的安全性，因为可以在客户端与网关之间的通信线路上加密以确保连接的安全。</p>
+<h2 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h2><p>隧道的目的是确保客户端与服务端进行安全的通信</p>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p>HTTPS实质上是添加了加密（SSL和TLS）和认证(数字证书)机制的HTTP</p>
+<p>HTTPS采用共享密钥加密和公开密钥加密的混合加密方式</p>
+<blockquote>
+<p>共享密钥加密：又叫对称加密，是指加密、解密都用同一个密钥</p>
+</blockquote>
+<blockquote>
+<p>公开密钥加密：又叫非对称加密，对外发布公钥，对数据进行加密，然后通过私钥对数据进行解密<br>HTTPS的加密方式是：对传输的报文数据采用共享密钥进行加密，而共享密钥加密的密钥又被公开密钥进行加密。<br>这样的好处是，避免了公共密钥加密需要耗费大量的CPU和内存资源，传输较慢的问题，同时又能够确保传输的数据能够安全传输。</p>
+</blockquote>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>数字签名技术就是对“非对称密钥加解密”和“数字摘要“两项技术的应用，它将摘要信息用发送者的私钥加密，与原文一起传送给接收者。</p>
+<p>接收者只有用发送者的公钥才能解密被加密的摘要信息，然后用HASH函数对收到的原文产生一个摘要信息，与解密的摘要信息对比。</p>
+<p>如果相同，则说明收到的信息是完整的，在传输过程中没有被修改，否则说明信息被修改过，因此数字签名能够验证信息的完整性。</p>
+<h2 id="数字证书颁发过程"><a href="#数字证书颁发过程" class="headerlink" title="数字证书颁发过程"></a>数字证书颁发过程</h2><p>用户首先产生自己的密钥对，并将公共密钥及部分个人身份信息传送给认证中心。</p>
+<p>认证中心在核实身份后，将执行一些必要的步骤，以确信请求确实由用户发送而来，然后，认证中心将发给用户一个数字证书，该证书内包含用户的个人信息和他的公钥信息，同时还附有认证中心的签名信息（根证书私钥签名）。用户就可以使用自己的数字证书进行相关的各种活动。</p>
+<h2 id="CA验证"><a href="#CA验证" class="headerlink" title="CA验证"></a>CA验证</h2><p>证书颁发的机构(CA)是伪造的，那么浏览器会认为是危险证书<br>证书颁发的机构是确实存在的，于是根据CA名，找到对应内置的CA根证书、CA的公钥。用CA的公钥，对伪造的证书的摘要进行解密，发现解不了，认为是危险证书<br>对于篡改的证书，使用CA的公钥对数字签名进行解密得到摘要A，然后再根据签名的Hash算法计算出证书的摘要B，对比A与B，若相等则正常，若不相等则是被篡改过的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/Babel-安装使用及基本原理/" rel="next" title="Babel 安装使用及基本原理">
+                <i class="fa fa-chevron-left"></i> Babel 安装使用及基本原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/22/Vue生命周期详解/" rel="prev" title="Vue生命周期详解">
+                Vue生命周期详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘若曦</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP"><span class="nav-number">1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-报文"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP 报文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-分层"><span class="nav-number">1.2.</span> <span class="nav-text">TCP/IP 分层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-状态码"><span class="nav-number">2.</span> <span class="nav-text">HTTP 状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-首部"><span class="nav-number">3.</span> <span class="nav-text">HTTP 首部</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通用首部："><span class="nav-number">3.1.</span> <span class="nav-text">通用首部：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求首部："><span class="nav-number">3.2.</span> <span class="nav-text">请求首部：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应首部："><span class="nav-number">3.3.</span> <span class="nav-text">响应首部：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体首部："><span class="nav-number">3.4.</span> <span class="nav-text">实体首部：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为-Cookie-服务的首部："><span class="nav-number">3.5.</span> <span class="nav-text">为 Cookie 服务的首部：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存相关首部"><span class="nav-number">3.6.</span> <span class="nav-text">缓存相关首部</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强缓存相关字段"><span class="nav-number">3.6.1.</span> <span class="nav-text">强缓存相关字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协商缓存相关"><span class="nav-number">3.6.2.</span> <span class="nav-text">协商缓存相关</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通信数据转发程序：代理、网关、隧道"><span class="nav-number">4.</span> <span class="nav-text">通信数据转发程序：代理、网关、隧道</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代理"><span class="nav-number">4.1.</span> <span class="nav-text">代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网关"><span class="nav-number">4.2.</span> <span class="nav-text">网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隧道"><span class="nav-number">4.3.</span> <span class="nav-text">隧道</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTPS"><span class="nav-number">5.</span> <span class="nav-text">HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名"><span class="nav-number">5.1.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字证书颁发过程"><span class="nav-number">5.2.</span> <span class="nav-text">数字证书颁发过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CA验证"><span class="nav-number">5.3.</span> <span class="nav-text">CA验证</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘若曦</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
