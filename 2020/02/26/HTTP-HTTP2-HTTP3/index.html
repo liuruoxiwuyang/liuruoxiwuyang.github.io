@@ -88,7 +88,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/HTTP-HTTP2-HTTP3/1.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/26/HTTP-HTTP2-HTTP3/2.png">
-<meta property="og:updated_time" content="2022-01-24T07:07:04.881Z">
+<meta property="og:updated_time" content="2022-01-24T08:19:02.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP&#x2F;HTTP2&#x2F;HTTP3">
 <meta name="twitter:description" content="HTTP的前世今生">
@@ -388,7 +388,7 @@
 <p>另外，<strong>HTTP/1.1传输数据时，是以文本的方式，借助耗CPU的zip压缩的方式减少网络带宽，但是耗了前端和后端的CPU。</strong>这也是为什么很多RPC协议诟病HTTP的一个原因，就是数据传输的成本比较大。</p>
 <p>其实，在2010年时，Google 就在搞一个实验型的协议，这个协议叫SPDY，这个协议成为了HTTP/2的基础（也可以说成HTTP/2就是SPDY的复刻）。HTTP/2基本上解决了之前的这些性能问题，其和HTTP/1.1最主要的不同是：</p>
 <ul>
-<li>1、HTTP/2是一个二进制协议，增加了数据传输的效率。</li>
+<li>1、HTTP/2是一个二进制分帧协议，增加了数据传输的效率。</li>
 <li>2、HTTP/2是可以在一个TCP链接中<strong>并发请求</strong>多个HTTP请求，移除了HTTP/1.1中的串行请求。</li>
 <li>3、HTTP/2会压缩头，如果你同时发出多个请求，他们的头是一样的或是相似的，那么，协议会帮你消除重复的部分。这就是所谓的HPACK算法（参看RFC 7541 附录A）</li>
 <li>4、HTTP/2允许服务端在客户端放cache，又叫服务端push，也就是说，你没有请求的东西，我服务端可以先送给你放在你的本地缓存中。比如，你请求X，我服务端知道X依赖于Y，虽然你没有的请求Y，但我把把Y跟着X的请求一起返回客户端。</li>
@@ -425,7 +425,7 @@
 <h3 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h3><p>1、keepalive长链接(重用TCP)<br>2、pipeline<br>3、服务端Push模型”，或是 “服务端Push式的HTTP 持久链接”<br>4、增加了 cache control 机制<br>5、协议头注增加了 Language, Encoding, Type 等等头<br>6、还正式加入了一个很重要的头—— HOST<br>7、正式加入了 OPTIONS 方法</p>
 <h3 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h3><p>1、二进制协议<br>2、可以在一个TCP链接中并发请求多个HTTP请求<br>3、压缩头<br>4、HTTP/2允许服务端在客户端放cache，又叫服务端push</p>
 <h3 id="HTTP3"><a href="#HTTP3" class="headerlink" title="HTTP3"></a>HTTP3</h3><p>把HTTP底层的TCP协议改成了UDP！</p>
-<p>文章来源于：<a href="https://coolshell.cn/articles/19840.html" target="_blank" rel="noopener">https://coolshell.cn/articles/19840.html</a><br>经典TCP问题：<a href="https://zhuanlan.zhihu.com/p/388704023" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/388704023</a></p>
+<p>文章来源于：<a href="https://coolshell.cn/articles/19840.html" target="_blank" rel="noopener">https://coolshell.cn/articles/19840.html</a><br>HTTP2.0: <a href="https://juejin.cn/post/6844903984524705800" target="_blank" rel="noopener">https://juejin.cn/post/6844903984524705800</a><br>HTTP3.0: <a href="https://blog.csdn.net/wolfGuiDao/article/details/108729560" target="_blank" rel="noopener">https://blog.csdn.net/wolfGuiDao/article/details/108729560</a><br>经典TCP问题：<a href="https://zhuanlan.zhihu.com/p/388704023" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/388704023</a></p>
 
       
     </div>
@@ -460,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2021/01/25/setStated的同步异步问题/" rel="prev" title="setState的同步异步问题">
-                setState的同步异步问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/04/HTTPS/" rel="prev" title="HTTPS">
+                HTTPS <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -539,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
