@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/5.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/6.png">
-<meta property="og:updated_time" content="2022-01-24T17:02:17.603Z">
+<meta property="og:updated_time" content="2022-01-24T17:03:03.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPS">
 <meta name="twitter:description" content="HTTP + 加密 + 认证 + 完整性保护 = HTTPS">
@@ -405,11 +405,13 @@
 <h2 id="2、证明公开密钥正确性的证书"><a href="#2、证明公开密钥正确性的证书" class="headerlink" title="2、证明公开密钥正确性的证书"></a>2、证明公开密钥正确性的证书</h2><p>数字证书认证机构（Certificate Authority CA）是客户端和服务器双方都可信赖的第三方机构。</p>
 <p>数字证书认证机构的业务流程：<br>服务器的运营人员向数字证书认证机构提出证书认证申请，数字证书认证机构在判明申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公钥证书（也叫数字证书或证书）后绑定在一起。服务器将这份有数字认证机构颁发的公钥证书发总给客户端，以进行公开密钥加密方式通信。</p>
 <p>接到证书的客户端可使用数字证书认证机构的公开密钥，对那张证书上的数字签名进行认证，一旦验证通过，客户端便可明确两件事：一 认证服务器的公开密钥是真实有效的数字证书认证机构。二、服务器的公开密钥是值得信赖的。</p>
-<p>此处认证机关的公开密钥必须安全的转交给客户端。使用通信方式时，如何安全转交时一件困难的事。因此，多数浏览器开发商发布版本时，会事先在内部植入常用的认证机关的公开密钥。<br><img src="/2020/03/04/HTTPS/4.png" alt=""></p>
+<p>此处认证机关的公开密钥必须安全的转交给客户端。使用通信方式时，如何安全转交时一件困难的事。因此，多数浏览器开发商发布版本时，会事先在内部植入常用的认证机关的公开密钥。</p>
+<p><img src="/2020/03/04/HTTPS/4.png" alt=""></p>
 <blockquote>
 <p>但是证书也是可以伪造的，如何保证证书为真呢？<br>一个证书中含有三个部分:”证书内容，散列算法，加密密文”，证书内容会被散列算法hash计算出hash值，然后使用CA机构提供的私钥进行RSA加密。当客户端发起请求时，服务器将该数字证书发送给客户端，客户端通过CA机构提供的公钥对加密密文进行解密获得散列值（数字签名），同时将证书内容使用相同的散列算法进行Hash得到另一个散列值，比对两个散列值，如果两者相等则说明证书没问题。</p>
 </blockquote>
-<h2 id="3、数据完整性（数字签名）"><a href="#3、数据完整性（数字签名）" class="headerlink" title="3、数据完整性（数字签名）"></a>3、数据完整性（数字签名）</h2><p>信息传输的途中，我们的信息很有可能被第三方劫持篡改，所以我们需要保证信息的完整性，通用方法是使用散列算法如SHA1，<a href="https://baike.baidu.com/item/MD5/212708?fr=aladdin" target="_blank" rel="noopener">MD5</a>将传输内容hash一次获得hash值，即摘要(一个128位的散列值)。客户端使用服务端的公钥对摘要和信息内容进行加密，然后传输给服务端，服务端使用私钥进行解密获得原始内容和摘要值，这时服务端使用相同的hash算法对原始内容进行hash，然后与摘要值比对，如果一致，说明信息是完整的。<br><img src="/2020/03/04/HTTPS/6.png" alt=""></p>
+<h2 id="3、数据完整性（数字签名）"><a href="#3、数据完整性（数字签名）" class="headerlink" title="3、数据完整性（数字签名）"></a>3、数据完整性（数字签名）</h2><p>信息传输的途中，我们的信息很有可能被第三方劫持篡改，所以我们需要保证信息的完整性，通用方法是使用散列算法如SHA1，<a href="https://baike.baidu.com/item/MD5/212708?fr=aladdin" target="_blank" rel="noopener">MD5</a>将传输内容hash一次获得hash值，即摘要(一个128位的散列值)。客户端使用服务端的公钥对摘要和信息内容进行加密，然后传输给服务端，服务端使用私钥进行解密获得原始内容和摘要值，这时服务端使用相同的hash算法对原始内容进行hash，然后与摘要值比对，如果一致，说明信息是完整的。</p>
+<p><img src="/2020/03/04/HTTPS/6.png" alt=""></p>
 
       
     </div>
@@ -523,7 +525,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -534,7 +536,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
