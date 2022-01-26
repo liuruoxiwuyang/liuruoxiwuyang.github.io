@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="若曦的博客">
 <meta property="og:description" content="this相关">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-01-26T11:24:22.124Z">
+<meta property="og:updated_time" content="2022-01-26T13:45:46.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this指向问题">
 <meta name="twitter:description" content="this相关">
@@ -356,7 +356,7 @@
 
       
         <p>this是在运行时绑定的（箭头函数例外），并不是在编写时绑定，它的上下文取决于函数调用时的各种条件。this的绑定和函数声明的位置没有任何关系，只取决于函数的调用方式。</p>
-<p>当一个函数被调用时，会创建一个活动记录（有时候也称为<strong><a href="">执行上下文</a></strong>）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方式、传入的参数等信息。this就是这个记录的一个属性，会在函数执行的过程中用到。</p>
+<p>当一个函数被调用时，会创建一个活动记录（有时候也称为<strong><a href="https://liuruoxiwuyang.github.io/2021/02/26/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/" target="_blank" rel="noopener">执行上下文</a></strong>）。这个记录会包含函数在哪里被调用（调用栈）、函数的调用方式、传入的参数等信息。this就是这个记录的一个属性，会在函数执行的过程中用到。</p>
 <h1 id="一、默认绑定"><a href="#一、默认绑定" class="headerlink" title="一、默认绑定"></a>一、默认绑定</h1><p>最常用的函数调用类型：独立函数调用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">	console.log(this.a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var a = 2;</span><br><span class="line"></span><br><span class="line">foo(); // 2</span><br></pre></td></tr></table></figure>
 <p>ps 如果使用严格模式，则会绑定到undefined</p>
