@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/5.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/6.png">
-<meta property="og:updated_time" content="2022-01-24T17:03:03.432Z">
+<meta property="og:updated_time" content="2022-02-09T10:24:38.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPS">
 <meta name="twitter:description" content="HTTP + 加密 + 认证 + 完整性保护 = HTTPS">
@@ -389,7 +389,7 @@
 </blockquote>
 <h2 id="1、加密方式的选择"><a href="#1、加密方式的选择" class="headerlink" title="1、加密方式的选择"></a>1、加密方式的选择</h2><h3 id="共享密钥加密-对称密钥加密"><a href="#共享密钥加密-对称密钥加密" class="headerlink" title="共享密钥加密 对称密钥加密"></a>共享密钥加密 对称密钥加密</h3><p>共享密钥加密方式使用相同的密钥进行加密解密，通信双方都需要接收对方的加密密钥进行数据解密，这种方式在通信过程中必须交互共享的密钥，同样无法避免被网络监听泄漏密钥的问题；同时对于众多客户端的服务器来说还需要分配和管理密钥，对于客户端来说也需要管理密钥，增加设计和实现的复杂度，同时也降低了通信的效率；不用看都不靠谱。<br><img src="/2020/03/04/HTTPS/1.png" alt=""></p>
 <h3 id="公开密钥加密"><a href="#公开密钥加密" class="headerlink" title="公开密钥加密"></a>公开密钥加密</h3><p>公开密钥加密方式使用一对非对称的密钥对（私钥和公钥），不公开的作为私钥，随意分发的作为公钥；公钥和私钥都能进行数据加密和解密，公钥能解密私钥加密的数据，私钥也能解密公钥加密的数据；这样只需要一套密钥就能处理服务端和众多客户端直接的通信被网络监听泄漏密钥的问题，同时没有额外的管理成本；看起来挺合适。</p>
-<p>非对称加密算法实现机密信息的交换过程为：<strong>甲方生成一对密钥并将其中一个作为公钥向其他方公开；得到该公钥的乙方使用该密钥对机密信息进行加密后发送给甲方；甲方再用自己的另一个专用密钥对加密后的信息进行解密。</strong></p>
+<p>非对称加密算法实现机密信息的交换过程为：<strong>乙方生成一对密钥并将其中一个作为公钥向其他方公开；得到该公钥的甲方使用该密钥对机密信息进行加密后发送给乙方；乙方再用自己的另一个专用密钥对加密后的信息进行解密。</strong></p>
 <p>最有名的非对称加密算法当属 <a href="https://www.zhihu.com/question/25912483" target="_blank" rel="noopener">RSA</a> （算法本身基于一个简单的数论知识：给出两个素数，很容易将它们相乘，然而给出它们的乘积，想得到这两个素数就显得尤为困难。如果能够解决大整数（比如几百位的整数）分解的快速方法，那么 RSA 算法将轻易被破解。）</p>
 <p><img src="/2020/03/04/HTTPS/2.png" alt=""></p>
 <p>没那么简单<br>公开密钥加密安全性高，伴随着加密方式复杂，处理速度慢的问题。如果我们的通信都是用公开密钥的方式加密，那么通信效率会很低。</p>
