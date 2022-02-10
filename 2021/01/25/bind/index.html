@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="若曦的博客">
 <meta property="og:description" content="bind的实现（利用apply方法）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-01-25T14:12:51.113Z">
+<meta property="og:updated_time" content="2022-02-09T13:05:16.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bind">
 <meta name="twitter:description" content="bind的实现（利用apply方法）">
@@ -371,6 +371,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Function.prototype._bind = function (context) &#123;</span><br><span class="line">    var self = this;</span><br><span class="line">    var args = Array.prototype.slice.call(arguments, 1);</span><br><span class="line"></span><br><span class="line">    var fBound = function () &#123;</span><br><span class="line">        var bindArgs = Array.prototype.slice.call(arguments);</span><br><span class="line">        // 当作为构造函数时，this 指向实例，此时结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值</span><br><span class="line">        // 以上面的是 demo 为例，如果改成 `this instanceof fBound ? null : context`，实例只是一个空对象，将 null 改成 this ，实例会具有 habit 属性</span><br><span class="line">        // 当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context</span><br><span class="line">        return self.apply(this instanceof fBound ? this : context, args.concat(bindArgs));</span><br><span class="line">    &#125;</span><br><span class="line">    // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数的原型中的值</span><br><span class="line">    fBound.prototype = this.prototype;</span><br><span class="line">    return fBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是在这个写法中，我们直接将 fBound.prototype = this.prototype，我们直接修改 fBound.prototype 的时候，也会直接修改绑定函数的 prototype。这个时候，我们可以通过一个空函数来进行中转：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 第四版</span><br><span class="line">Function.prototype._bind = function (context) &#123;</span><br><span class="line">    if (typeof this !== &quot;function&quot;) &#123;</span><br><span class="line">      throw new Error(&quot;Function.prototype.bind - what is trying to be bound is not callable&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var self = this;</span><br><span class="line">    var args = Array.prototype.slice.call(arguments, 1);</span><br><span class="line"></span><br><span class="line">    var fNOP = function () &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    var fBound = function () &#123;</span><br><span class="line">        var bindArgs = Array.prototype.slice.call(arguments);</span><br><span class="line">        return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fNOP.prototype = this.prototype;</span><br><span class="line">    fBound.prototype = new fNOP();</span><br><span class="line">    return fBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>引深：<a href="https://github.com/mqyqingfeng/Blog/issues/11" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/11</a></p>
+<p><a href="https://github.com/mqyqingfeng/Blog/issues/11" target="_blank" rel="noopener">call、apply的模拟实现</a></p>
 
       
     </div>
@@ -484,7 +485,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
