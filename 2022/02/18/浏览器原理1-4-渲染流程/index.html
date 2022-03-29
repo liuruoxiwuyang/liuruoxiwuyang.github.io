@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2022/02/18/浏览器原理1-4-渲染流程/18.png">
 <meta property="og:image" content="http://yoursite.com/2022/02/18/浏览器原理1-4-渲染流程/19.png">
 <meta property="og:image" content="http://yoursite.com/2022/02/18/浏览器原理1-4-渲染流程/20.png">
-<meta property="og:updated_time" content="2022-02-18T09:16:59.945Z">
+<meta property="og:updated_time" content="2022-02-21T08:09:47.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器原理1.4:渲染流程">
 <meta name="twitter:description" content="渲染流程">
@@ -470,7 +470,7 @@
 <p>相信你还记得，GPU操作是运行在GPU进程中，如果栅格化操作使用了GPU，那么最终生成位图的操作是在GPU中完成的，这就涉及到了跨进程操作。具体形式你可以参考下图：</p>
 <p><img src="/2022/02/18/浏览器原理1-4-渲染流程/20.png" alt="浏览器原理1.4:渲染流程"></p>
 <p>从图中可以看出，渲染进程把生成图块的指令发送给GPU，然后在GPU中执行生成图块的位图，并保存在GPU的内存中。</p>
-<h1 id="七、合成和显示"><a href="#七、合成和显示" class="headerlink" title="七、合成和显示"></a>七、合成和显示</h1><p>一旦所有图块都被光栅化，合成线程就会生成一个绘制图块的命令——“DrawQuad”，然后将该命令提交给浏览器进程。</p>
+<h1 id="七、合成和显示（深入了解合成层）"><a href="#七、合成和显示（深入了解合成层）" class="headerlink" title="七、合成和显示（深入了解合成层）"></a>七、合成和显示（<a href="https://juejin.cn/post/6844903502678867981" target="_blank" rel="noopener">深入了解合成层</a>）</h1><p>一旦所有图块都被光栅化，合成线程就会生成一个绘制图块的命令——“DrawQuad”，然后将该命令提交给浏览器进程。</p>
 <p>浏览器进程里面有一个叫viz的组件，用来接收合成线程发过来的DrawQuad命令，然后根据DrawQuad命令，将其页面内容绘制到内存中，最后再将内存显示在屏幕上。</p>
 <p>到这里，经过这一系列的阶段，编写好的HTML、CSS、JavaScript等文件，经过浏览器就会显示出漂亮的页面了。</p>
 
@@ -506,6 +506,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/19/浏览器原理1-5-重排和重绘/" rel="prev" title="浏览器原理1.5:重排和重绘">
+                浏览器原理1.5:重排和重绘 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -582,7 +586,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -637,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、构建DOM树"><span class="nav-number">1.</span> <span class="nav-text">一、构建DOM树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、样式计算"><span class="nav-number">2.</span> <span class="nav-text">二、样式计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-把CSS转换为浏览器能够理解的结构"><span class="nav-number">2.1.</span> <span class="nav-text">1 把CSS转换为浏览器能够理解的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-转换样式表中的属性值，使其标准化"><span class="nav-number">2.2.</span> <span class="nav-text">2. 转换样式表中的属性值，使其标准化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-计算出DOM树中每个节点的具体样式"><span class="nav-number">2.3.</span> <span class="nav-text">3. 计算出DOM树中每个节点的具体样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、布局阶段"><span class="nav-number">3.</span> <span class="nav-text">三、布局阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建布局树"><span class="nav-number">3.1.</span> <span class="nav-text">1. 创建布局树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-布局计算"><span class="nav-number">3.2.</span> <span class="nav-text">2. 布局计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、分层"><span class="nav-number">4.</span> <span class="nav-text">四、分层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一点，拥有层叠上下文属性的元素会被提升为单独的一层。"><span class="nav-number">4.0.1.</span> <span class="nav-text">第一点，拥有层叠上下文属性的元素会被提升为单独的一层。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二点，需要剪裁（clip）的地方也会被创建为图层。"><span class="nav-number">4.0.2.</span> <span class="nav-text">第二点，需要剪裁（clip）的地方也会被创建为图层。</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#五、图层绘制"><span class="nav-number">5.</span> <span class="nav-text">五、图层绘制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-栅格化（raster）操作"><span class="nav-number">6.</span> <span class="nav-text">六 栅格化（raster）操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、合成和显示"><span class="nav-number">7.</span> <span class="nav-text">七、合成和显示</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、构建DOM树"><span class="nav-number">1.</span> <span class="nav-text">一、构建DOM树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、样式计算"><span class="nav-number">2.</span> <span class="nav-text">二、样式计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-把CSS转换为浏览器能够理解的结构"><span class="nav-number">2.1.</span> <span class="nav-text">1 把CSS转换为浏览器能够理解的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-转换样式表中的属性值，使其标准化"><span class="nav-number">2.2.</span> <span class="nav-text">2. 转换样式表中的属性值，使其标准化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-计算出DOM树中每个节点的具体样式"><span class="nav-number">2.3.</span> <span class="nav-text">3. 计算出DOM树中每个节点的具体样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、布局阶段"><span class="nav-number">3.</span> <span class="nav-text">三、布局阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建布局树"><span class="nav-number">3.1.</span> <span class="nav-text">1. 创建布局树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-布局计算"><span class="nav-number">3.2.</span> <span class="nav-text">2. 布局计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、分层"><span class="nav-number">4.</span> <span class="nav-text">四、分层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一点，拥有层叠上下文属性的元素会被提升为单独的一层。"><span class="nav-number">4.0.1.</span> <span class="nav-text">第一点，拥有层叠上下文属性的元素会被提升为单独的一层。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二点，需要剪裁（clip）的地方也会被创建为图层。"><span class="nav-number">4.0.2.</span> <span class="nav-text">第二点，需要剪裁（clip）的地方也会被创建为图层。</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#五、图层绘制"><span class="nav-number">5.</span> <span class="nav-text">五、图层绘制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-栅格化（raster）操作"><span class="nav-number">6.</span> <span class="nav-text">六 栅格化（raster）操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、合成和显示（深入了解合成层）"><span class="nav-number">7.</span> <span class="nav-text">七、合成和显示（深入了解合成层）</span></a></li></div>
             
 
           </div>
