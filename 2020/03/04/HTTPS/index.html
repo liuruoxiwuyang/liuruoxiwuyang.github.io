@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTTP + 加密 + 认证 + 完整性保护 = HTTPS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTPS">
+<meta property="og:url" content="http://yoursite.com/2020/03/04/HTTPS/index.html">
+<meta property="og:site_name" content="若曦的博客">
+<meta property="og:description" content="HTTP + 加密 + 认证 + 完整性保护 = HTTPS">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/04/HTTPS/6.png">
+<meta property="og:updated_time" content="2022-02-09T10:24:38.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTPS">
+<meta name="twitter:description" content="HTTP + 加密 + 认证 + 完整性保护 = HTTPS">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/04/HTTPS/3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/04/HTTPS/">
+
+
+
+
+
+  <title>HTTPS | 若曦的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">若曦的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/04/HTTPS/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘若曦">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="若曦的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTPS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-04T21:10:26+08:00">
+                2020-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTP/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  HTTP + 加密 + 认证 + 完整性保护 = HTTPS
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、安全的HTTP需求"><a href="#一、安全的HTTP需求" class="headerlink" title="一、安全的HTTP需求"></a>一、安全的HTTP需求</h1><p>HTTP是不安全的，我们的页面也被运营商插入过小黄图广告（数据被篡改），对于HTTP来说，再简单不过，只需要设定相应的DNS，做一个中间人攻击，再将修改后的数据返回，这一方面可能泄露用户隐私数据，同时也对我们的品牌形象产生恶劣影响。</p>
+<p>然而，当我们切换HTTPS时候，运营商的这些小九九就施展不开了，服务端认证不通过，浏览器不会展示相应的页面数据；运营商实施搞的这一套东东也就不能在用户不知情的情况下搞起来了，解决办法是去除相应的受污染的DNS。</p>
+<p>全球最大的成人网站PornHub，YouPorn都要全面切HTTPS了,我们还在犹豫什么了？</p>
+<p>对HTTP的安全需求：</p>
+<ul>
+<li>加密（客户端和服务器的对话是私密的，无须担心被窃听）</li>
+<li>服务端认证（客户端知道它们是在与真正的而不是伪造的服务器通信）</li>
+<li>客户端认证（服务器知道它们是在与真正的而不是伪造的客户端通信）</li>
+<li>完整性（客户端和服务器的数据不会被修改）</li>
+<li>效率（一个运行足够快的算法，一遍低端的客户端和服务器使用）</li>
+<li>普适性（基本上所有的客户端和服务器都支持这些协议）</li>
+<li>管理的可扩展性（在任何地方的任何人都可以立即进行安全通信）</li>
+<li>适应性（能够支持当前最知名的安全方法）</li>
+<li>在社会上的可行性（满足社会的政治文化需要），要有公众受信能力</li>
+</ul>
+<p>在这里面最重要的是前面几条</p>
+<ul>
+<li><strong>数据加密 传输内容进行混淆</strong></li>
+<li><strong>身份验证 通信双方验证对方的身份真实性</strong></li>
+<li><strong>数据完整性保护 检测传输的内容是否被篡改或伪造</strong></li>
+</ul>
+<h1 id="二、安全的HTTP实现：HTTP-加密-认证-完整性保护-HTTPS"><a href="#二、安全的HTTP实现：HTTP-加密-认证-完整性保护-HTTPS" class="headerlink" title="二、安全的HTTP实现：HTTP + 加密 + 认证 + 完整性保护 = HTTPS"></a>二、安全的HTTP实现：HTTP + 加密 + 认证 + 完整性保护 = HTTPS</h1><p><img src="/2020/03/04/HTTPS/3.png" alt=""><br><strong>HTTPS并非是应用层的一种新协议。只是HTTP通信借口部分用SSL和TLS协议代替而已。采用了SSL后，HTTP就拥有了HTTPS的加密、证书和完整性保护这些功能。</strong></p>
+<blockquote>
+<p>（使用TCP端口默认为443<br>TLS：(Transport Layer Security，传输层安全协议)，用于两个应用程序之间提供保密性和数据完整性。<br>SSL：（Secure Socket Layer，安全套接字层），位于可靠的面向连接的网络层协议和应用层协议之间的一种协议层。SSL通过互相认证、使用数字签名确保完整性、使用加密确保私密性，以实现客户端和服务器之间的安全通讯。<br>SSL协议即用到了对称加密也用到了非对称加密(公钥加密)，在建立传输链路时，SSL首先对对称加密的密钥使用公钥进行非对称加密，链路建立好之后，SSL对传输内容使用对称加密。）</p>
+</blockquote>
+<h2 id="1、加密方式的选择"><a href="#1、加密方式的选择" class="headerlink" title="1、加密方式的选择"></a>1、加密方式的选择</h2><h3 id="共享密钥加密-对称密钥加密"><a href="#共享密钥加密-对称密钥加密" class="headerlink" title="共享密钥加密 对称密钥加密"></a>共享密钥加密 对称密钥加密</h3><p>共享密钥加密方式使用相同的密钥进行加密解密，通信双方都需要接收对方的加密密钥进行数据解密，这种方式在通信过程中必须交互共享的密钥，同样无法避免被网络监听泄漏密钥的问题；同时对于众多客户端的服务器来说还需要分配和管理密钥，对于客户端来说也需要管理密钥，增加设计和实现的复杂度，同时也降低了通信的效率；不用看都不靠谱。<br><img src="/2020/03/04/HTTPS/1.png" alt=""></p>
+<h3 id="公开密钥加密"><a href="#公开密钥加密" class="headerlink" title="公开密钥加密"></a>公开密钥加密</h3><p>公开密钥加密方式使用一对非对称的密钥对（私钥和公钥），不公开的作为私钥，随意分发的作为公钥；公钥和私钥都能进行数据加密和解密，公钥能解密私钥加密的数据，私钥也能解密公钥加密的数据；这样只需要一套密钥就能处理服务端和众多客户端直接的通信被网络监听泄漏密钥的问题，同时没有额外的管理成本；看起来挺合适。</p>
+<p>非对称加密算法实现机密信息的交换过程为：<strong>乙方生成一对密钥并将其中一个作为公钥向其他方公开；得到该公钥的甲方使用该密钥对机密信息进行加密后发送给乙方；乙方再用自己的另一个专用密钥对加密后的信息进行解密。</strong></p>
+<p>最有名的非对称加密算法当属 <a href="https://www.zhihu.com/question/25912483" target="_blank" rel="noopener">RSA</a> （算法本身基于一个简单的数论知识：给出两个素数，很容易将它们相乘，然而给出它们的乘积，想得到这两个素数就显得尤为困难。如果能够解决大整数（比如几百位的整数）分解的快速方法，那么 RSA 算法将轻易被破解。）</p>
+<p><img src="/2020/03/04/HTTPS/2.png" alt=""></p>
+<p>没那么简单<br>公开密钥加密安全性高，伴随着加密方式复杂，处理速度慢的问题。如果我们的通信都是用公开密钥的方式加密，那么通信效率会很低。</p>
+<p><strong>HTTPS采取混合加密的方式：</strong></p>
+<blockquote>
+<p><strong>HTTPS采用共享密钥加密和公开密钥加密混合的加密方式，在交换密钥对环节使用公开密钥加密方式（防止被监听泄漏密钥）加密共享的密钥，在随后的通信过程中使用共享密钥的方式使用共享的密钥进行加解密。</strong></p>
+</blockquote>
+<p>遗憾的是，公开密钥加密方式还是存在一些问题的。<strong>那就是无法证明公开密钥本身就是货真价实的公开密钥。</strong></p>
+<blockquote>
+<p>（比如，正准备和某台服务器建立公开密钥加密方式下的通信时，如何证明收到的公开密钥本身就是预想的那台服务器发行的公开密钥。或许在公开密钥传输途中，真正的公开密钥已经被攻击者替换掉了。在传输的过程中，客户端如何获得服务器端的公钥呢？当时是服务器分发给客户端，如果一开始服务端发送的公钥到客户端的过程中有可能被第三方劫持，然后第三方自己伪造一对密钥，将公钥发送给客户端，当服务器发送数据给客户端的时候，中间人将信息进行劫持，用一开始劫持的公钥进行解密后，然后使用自己的私钥将数据加密发送给客户端，而客户端收到后使用公钥解密，反过来亦是如此，整个过程中间人是透明的，但信息泄露却不得而知。）<br><img src="/2020/03/04/HTTPS/5.png" alt=""></p>
+</blockquote>
+<p><strong>为了解决这个问题，可以使用由数字认证机构（CA，Certificate Authority）和其相关机关颁发的公开密钥证书。</strong></p>
+<h2 id="2、证明公开密钥正确性的证书"><a href="#2、证明公开密钥正确性的证书" class="headerlink" title="2、证明公开密钥正确性的证书"></a>2、证明公开密钥正确性的证书</h2><p>数字证书认证机构（Certificate Authority CA）是客户端和服务器双方都可信赖的第三方机构。</p>
+<p>数字证书认证机构的业务流程：<br>服务器的运营人员向数字证书认证机构提出证书认证申请，数字证书认证机构在判明申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公钥证书（也叫数字证书或证书）后绑定在一起。服务器将这份有数字认证机构颁发的公钥证书发总给客户端，以进行公开密钥加密方式通信。</p>
+<p>接到证书的客户端可使用数字证书认证机构的公开密钥，对那张证书上的数字签名进行认证，一旦验证通过，客户端便可明确两件事：一 认证服务器的公开密钥是真实有效的数字证书认证机构。二、服务器的公开密钥是值得信赖的。</p>
+<p>此处认证机关的公开密钥必须安全的转交给客户端。使用通信方式时，如何安全转交时一件困难的事。因此，多数浏览器开发商发布版本时，会事先在内部植入常用的认证机关的公开密钥。</p>
+<p><img src="/2020/03/04/HTTPS/4.png" alt=""></p>
+<blockquote>
+<p>但是证书也是可以伪造的，如何保证证书为真呢？<br>一个证书中含有三个部分:”证书内容，散列算法，加密密文”，证书内容会被散列算法hash计算出hash值，然后使用CA机构提供的私钥进行RSA加密。当客户端发起请求时，服务器将该数字证书发送给客户端，客户端通过CA机构提供的公钥对加密密文进行解密获得散列值（数字签名），同时将证书内容使用相同的散列算法进行Hash得到另一个散列值，比对两个散列值，如果两者相等则说明证书没问题。</p>
+</blockquote>
+<h2 id="3、数据完整性（数字签名）"><a href="#3、数据完整性（数字签名）" class="headerlink" title="3、数据完整性（数字签名）"></a>3、数据完整性（数字签名）</h2><p>信息传输的途中，我们的信息很有可能被第三方劫持篡改，所以我们需要保证信息的完整性，通用方法是使用散列算法如SHA1，<a href="https://baike.baidu.com/item/MD5/212708?fr=aladdin" target="_blank" rel="noopener">MD5</a>将传输内容hash一次获得hash值，即摘要(一个128位的散列值)。客户端使用服务端的公钥对摘要和信息内容进行加密，然后传输给服务端，服务端使用私钥进行解密获得原始内容和摘要值，这时服务端使用相同的hash算法对原始内容进行hash，然后与摘要值比对，如果一致，说明信息是完整的。</p>
+<p><img src="/2020/03/04/HTTPS/6.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/26/HTTP-HTTP2-HTTP3/" rel="next" title="HTTP/HTTP2/HTTP3">
+                <i class="fa fa-chevron-left"></i> HTTP/HTTP2/HTTP3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/25/setStated的同步异步问题/" rel="prev" title="setState的同步异步问题">
+                setState的同步异步问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">刘若曦</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、安全的HTTP需求"><span class="nav-number">1.</span> <span class="nav-text">一、安全的HTTP需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、安全的HTTP实现：HTTP-加密-认证-完整性保护-HTTPS"><span class="nav-number">2.</span> <span class="nav-text">二、安全的HTTP实现：HTTP + 加密 + 认证 + 完整性保护 = HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、加密方式的选择"><span class="nav-number">2.1.</span> <span class="nav-text">1、加密方式的选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共享密钥加密-对称密钥加密"><span class="nav-number">2.1.1.</span> <span class="nav-text">共享密钥加密 对称密钥加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公开密钥加密"><span class="nav-number">2.1.2.</span> <span class="nav-text">公开密钥加密</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、证明公开密钥正确性的证书"><span class="nav-number">2.2.</span> <span class="nav-text">2、证明公开密钥正确性的证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、数据完整性（数字签名）"><span class="nav-number">2.3.</span> <span class="nav-text">3、数据完整性（数字签名）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘若曦</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
